@@ -12,6 +12,7 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 #define encoder0PinB 11
 const int buttonPin = 9;     // the number of the pushbutton pin
 uint8_t encoder0Pos = 0;
+uint8_t displayencoder0Pos = 0;
  byte encoder0PinALast = LOW;
  byte encoderN = LOW;
 const int buttondownPin = 10;     // the number of the pushbutton pin
@@ -61,15 +62,15 @@ encoderN = digitalRead(encoder0PinA);
      }
   } 
   encoder0PinALast = encoderN;
-
+displayencoder0Pos = encoder0Pos + 1;
  int buttonValue = digitalRead(buttonPin);
    if (buttonValue == LOW){
        MIDIchange(PROGRAM_CHANGE, encoder0Pos);
        lcd.setCursor(0,0);
        lcd.clear();
-switch (encoder0Pos) {
+switch (displayencoder0Pos) {
     case 0:    
-      lcd.print("Piano 1");
+      lcd.print("Piano");
       break;
     case 1:    
       lcd.print("Piano");
